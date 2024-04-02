@@ -17,7 +17,7 @@ import java.util.Random;
  *
  * @author user
  */
-public class NewClass {
+public class JavaMemoryMap2 {
     public final static long n = 10_000_000;        
     public final static SequenceLayout layout = MemoryLayout.sequenceLayout(n,
 				MemoryLayout.structLayout(
