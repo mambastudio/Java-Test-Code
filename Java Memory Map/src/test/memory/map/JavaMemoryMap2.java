@@ -35,8 +35,6 @@ public class JavaMemoryMap2 {
         try (Arena arena = Arena.ofConfined()) {
             
             MemorySegment mem = arena.allocate(layout);
-            
-            
            
             Random rng = new Random();
             for (long i = 0; i < n; i++) {
@@ -50,11 +48,11 @@ public class JavaMemoryMap2 {
             for (int i = 0; i < n; i++) {
                     float x = (float) xHandle.get(mem, 0L, (long)i);
                     float y = (float) yHandle.get(mem, 0L, (long)i);
-                    int flags = (int) flagsHandle.get(mem, 0L, (long)i);
-                    if ((flags & 256) == 0) continue;
+                    int flags = (int) flagsHandle.get(mem, 0L, (long)i);                   
                     float fx = x;
                     float fy = y;
-                    sum += fx*fy;
+                    float sumx = fx*fy;
+                    sum += sumx * ((flags >> 8) & 1);
             }
             long dt = System.nanoTime() - t0;
             System.out.println("sum="+sum+" "+(float)n/(dt*1e-9)+" it/s");
